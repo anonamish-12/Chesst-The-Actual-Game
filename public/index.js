@@ -142,3 +142,26 @@ window.saveBoardStates = async function(gameId, game) {
 
 
 
+//Caching all images upon loading
+const fs = require('fs');
+const path = require('path');
+
+const imageCache = {};
+const imagesDir = path.join(__dirname, 'public', 'images');
+
+function preloadImages() {
+  fs.readdir(imagesDir, (err, files) => {
+    if (err) throw err;
+    const imagePaths = files
+      .filter(file => /\.(png|jpg|jpeg|gif)$/i.test(file))
+      .map(file => `/images/${file}`);
+    imagePaths.forEach(path => {
+      const img = new Image();
+      img.src = path;
+      imageCache[path] = img;
+    });
+  });
+}
+
+preloadImages();
+
