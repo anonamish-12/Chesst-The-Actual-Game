@@ -684,6 +684,7 @@ export class Game {
             positionsArray[oldR][oldC] -= unit.digit
             oldDigit -= unit.digit
             oldTile.firstChild.src = `../images/${Math.abs(oldDigit)}.png`
+            this.displayCheckedKing()
             this.displayStats() //Updating the player's information window
             this.explosion(row, col) //triggering the explosion animation
             this.attemptCloning() //If the user has a clone available, it will use it
@@ -1085,23 +1086,31 @@ export class Game {
     }
 
 
+    /**
+     * Fetches the active player's king.
+     * @returns The unit if found. Else, false.
+     */
+    getKingUnit() {
+        let king = false;
+        this.turn.activePlayer.livingUnits.forEach(unit => {
+                if ( Math.abs(unit.digit) === 6 ) {
+                    king = unit; //Found him
+                }
+            })
+        return king
+    }
+
 
     /**
      * Applies a red background to the king's position if he is in check. Removes it if he is not.
      */
     displayCheckedKing() {
         let turn = this.turn
-        let king = null;
-
-        //Searching for the king
-        turn.activePlayer.livingUnits.forEach(unit => {
-            if ( Math.abs(unit.digit) === 6 ) {
-                king = unit; //Found him
-            }
-        })
+        
+        let king = this.getKingUnit()
         
 
-        if (king === null) {
+        if (king === false) {
 
             //This means the king has been eliminated by a mimic or a mine
             this.endGame()
@@ -1396,6 +1405,7 @@ export class Game {
             }
             let player = this.turn.activePlayer
 
+            let isKingAlive = this.getKingUnit();
 
             //Filtering through set Mines and removing them from the display
             player.setMines.forEach(mine => {
@@ -1446,6 +1456,8 @@ export class Game {
                     tile.firstChild.src = `../images/10.png`
                 }
             })
+
+            if (isKingAlive === false) this.endGame()
 
             //Ticking the chest in its countdowns
             this.chest.tick(this.positionsArray);
