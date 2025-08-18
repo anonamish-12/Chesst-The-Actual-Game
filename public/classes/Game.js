@@ -603,7 +603,6 @@ export class Game {
      * Gives the active player the contents of a chest
      */
     async collectChest() {
-        console.log("Chest Collected")
         let unit = this.turn.selectedUnit
         let chest = this.chest
         let positionsArray = this.positionsArray
@@ -1471,8 +1470,6 @@ export class Game {
             ++this.counts
 
             this.displayIntermediatoryScreen();
-
-            console.log(this.boardStates)
 
         }
 
