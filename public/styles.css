@@ -1,0 +1,584 @@
+/*
+================================================================================
+                                  CHESST CSS
+================================================================================
+*/
+
+
+/*
+┌─ SKY STYLES
+│
+├─ HOME PAGE
+│  └─ buttons
+│
+├─ GAME SETUP
+│  ├─ board
+│  ├─ displaysection
+│  ├─ intermediate screens
+│  └─ pop windows
+│
+└─ GENERAL STYLES
+*/
+
+/* ============================================================================
+   SKY STYLES
+   ============================================================================ */
+
+    #sky { /* Sky Wrapper */
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -4;
+        overflow: hidden;
+    }
+
+    .sky-section { /* Sky Top/Bottom */
+        position: absolute;
+        width: 100%;
+        height: 50%;
+        overflow: hidden;
+    }
+
+    .sky-top {
+        top: 0;
+    }
+
+    .sky-bottom {
+        bottom: 0;
+    }
+
+    .skyForeground { /* Whiter Clouds */
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: row;
+        z-index: -2;
+        animation: scroll linear 250s infinite;
+    }
+
+    .skyBackground { /* Bluer Clouds */
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: row;
+        z-index: -3;
+        animation: scroll linear 310s infinite;
+    }
+
+    .skyForeground > img { /* Whiter Sprites */
+        width: 420px;
+        height: 420px;
+        flex-shrink: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .skyBackground > img { /* Whiter Sprites */
+        width: 420px;
+        height: 420px;
+        flex-shrink: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    @keyframes scroll { /* See skyFore/Background */
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-50%); }
+    }
+
+
+/* ============================================================================
+   HOME STYLES
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+    HOME - BUTTONS
+    ---------------------------------------------------------------------------- */
+
+    #homePage {
+        font-family: "Press Start 2P";
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+
+        justify-self: center;
+    }
+
+    #title {
+        align-self: end;   
+        font-size: 4rem;
+        display: inline-block;
+        color:#ffffff;
+        -webkit-text-stroke: 2px black; /* Width and color of the outline */
+    }
+
+    #T {
+        display: inline-block;
+        background-color: #000000;
+        background-image: url('./images/BlackSkin.png');
+        background-size: cover;
+        background-position: center; 
+        background-clip: text; 
+        -webkit-background-clip: text; 
+        color: transparent; 
+    }
+
+    #homeBttns {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #vAIBttn > p {
+        color: #000000;
+        padding-left: 1%;
+        position: absolute;
+        font-weight: bolder;
+        justify-self: center;
+        align-self: start;
+        font-size: 0.8rem;
+        transform: rotate(45deg);
+        z-index: 9999;
+    }
+
+    #PnPBttn > button, #vAIBttn > button {
+        font-family: "Press Start 2P";
+        font-size: 0.8rem;
+        height: 4.75vh;
+        width: 12vh;
+        margin: 1vh;
+        margin-left: 1.5vh;
+        margin-right: 1.5vh;
+        text-align: center;
+    }
+
+    #vAIBttn > button {
+        filter: blur(2);
+        opacity: 0.5;
+    }
+
+
+    @media screen and (max-width: 850px) {
+
+    }
+
+
+/* ============================================================================ 
+   GAME STYLES
+   ============================================================================ */
+
+    #game {
+        width: 100%;
+        margin: 0;
+        padding: 12px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-content: center;
+    }
+
+    @media screen and (max-width: 850px) {
+
+        #game {
+            flex-direction: column;
+            padding: 8px;
+        }
+
+    }
+
+/* ----------------------------------------------------------------------------
+    GAME - BOARD
+    ---------------------------------------------------------------------------- */
+
+        #superBoard{ /* Board Wrapper */
+            width: 800px; 
+            height: 800px; 
+            position: relative;
+            overflow: hidden;
+        }
+
+        #board { /* Div to hold tiles */
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            width: 100%;
+            height: 100%; 
+            background-color: green; 
+            background-image: url('./images/Board.png');
+            background-size: cover; 
+            background-position: center; 
+            border: 1px solid #B3710E; 
+
+            justify-self: center;
+            align-self: center;
+        }
+
+
+        .tiles { /* The squares of a board */
+            background-color:rgba(255, 255, 255, 0);
+            border: 1px solid #B3710E; 
+            box-sizing: border-box; 
+            aspect-ratio: 1/1;
+            max-width: 100px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tiles > img { /* Tile Sprites */
+            aspect-ratio: 1/1;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .tiles:not(:nth-child(8n)) { /* Border Control */
+            margin-right: -1px; 
+        }
+
+        .tiles:not(:nth-last-child(-n+8)) { /* Border Control */
+            margin-bottom: -1px; 
+        }
+
+        @media screen and (max-width: 850px) {
+            #superBoard {
+                width: 100%;
+                max-width: 95vmin;
+                height: 95vmin;
+                align-self: center;
+            }
+        }
+
+
+
+/* ----------------------------------------------------------------------------
+    GAME - DISPLAY SECTION
+    ---------------------------------------------------------------------------- */
+
+        #displaySection { /* The Information Window */
+            flex: 1;
+            max-width: 25%;
+            max-height: 800px;
+            border: 2px solid black;
+            background-color: rgba(0,0,0,0.25);
+            backdrop-filter: blur(1px);
+            margin-left: 12px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .subDisplay { /* Windows for specific items */
+            display: flex;
+            flex-direction: column;
+            padding: 5%;
+            width: 100%;
+            padding-bottom: 40px;
+            align-self: center;
+            align-content: center;
+            height: 30%;
+        }
+        
+        .header { /* Display Description */
+            font-family: 'Press Start 2P', arial;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        
+        .header1 {
+            text-wrap: nowrap;
+        }
+
+        .header2 {
+            text-wrap: nowrap;
+            margin-left: 7px;
+        }
+        
+        .displayedUnits { /* Div for displaying unit sprites */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            justify-items: center;
+            align-items: center;
+            align-self: center;
+            width: 80%;
+        }
+        
+        .lostUnitDiv { /* Cards for individual sprites */
+            width: 100%;
+            aspect-ratio: 1/1;
+        }
+        
+        .lostUnitSprite { 
+            width: 100%;
+            aspect-ratio: 1/1;
+        }
+        
+        #specialObjects { /* The Window For Displaying Mine And Clone Objects  */
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            justify-items: start;
+            align-self: center;
+            width: 80%;
+            height: 100%;
+        }
+        
+        #mines, #clones {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(1, 1fr);
+        }
+        
+        
+        #endTurnInactive { /*Button to end turn*/
+            background: #a7a7a7;
+            color: #ffffff;
+            box-shadow: inset -4px -4px 0px 0px #80807fff;
+        }
+        
+        #endTurnActive { 
+            background: #76c442;
+            color: #ffffff;
+            box-shadow: inset -4px -4px 0px 0px #54B23E;
+        
+        }
+        
+        #endTurnActive:hover {
+            background: #76c442;
+            box-shadow: inset -4px -4px 0px 0px #4AA52E;
+            color: #f3f3f3ff;
+        }
+        
+        .button { /* All Usable Buttons */
+            position: absolute;
+            display: flex;              
+            align-items: center;     
+            align-self: center; 
+            justify-content: center;
+            position: relative;
+            text-align: center;
+            font-size: 20px;
+            padding: 20px;
+            font-family: 'Press Start 2P', arial;
+            text-decoration: none; 
+            border: none;
+            cursor: pointer;
+            
+            /* Positioning */
+            margin-top: auto;
+            margin-bottom: 30px;
+            width: auto;
+            height: 30px;
+        }
+        
+        .button:before,
+        .button:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-sizing: content-box;
+        }
+        
+        .button:before {
+            top: -3px;
+            left: 0;
+            border-top: 3px black solid;
+            border-bottom: 3px black solid;
+        }
+        
+        .button:after {
+            left: -3px;
+            top: 0;
+            border-left: 3px black solid;
+            border-right: 3px black solid;
+        }
+        
+        /* BUTTON STYLE CREATED BY @Maximuz ON CodePen */
+                    /* THANKS MAX! */
+        /* https://codepen.io/Maximuz/pen/BdqXXN */
+        
+        @media screen and (max-width: 850px) {
+
+            /* Smaller font for mobile headers */
+            .header1, .header2 {
+                font-size: 10px;
+            }
+
+            /* Adjust displayed units grid for smaller screens */
+            .displayedUnits {
+                width: 100%;
+            }
+
+            /* Move displaySection above board */
+            #displaySection {
+                order: -1;
+                width: 95vmin;
+                min-width: 95vmin;
+                margin-left: 0;
+                margin-bottom: 12px;
+                height: 200px; 
+                max-height: 200px; /* Prevent growing */
+                flex-direction: row;
+                justify-content: center;
+                align-self: center;
+                padding-bottom: 10px;
+                border-width: 1px;
+                overflow: hidden; /* Hide overflow */
+                position: relative;
+            }
+
+            /* Grid layout for mobile display section */
+            .mobile-display-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+                gap: 10px;
+                width: 100%;
+                height: 100%;
+            }
+
+            .subDisplay .header {
+                margin-bottom: 10px;
+                font-size: 12px;
+                flex-shrink: 0;
+                height: 20px;
+            }
+
+            .subDisplay .displayedUnits,
+            .subDisplay #specialObjects {
+                grid-row: 2;
+                width: 100%;
+                flex: 1;
+                max-height: 20vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .subDisplay {
+                padding: 2%;
+                height: calc(100% - 20px);
+                max-height: calc(100% - 20px);
+                width: auto;
+                flex: 1;
+                margin-bottom: auto;
+                padding-bottom: 10px;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .displayedUnits, .lostUnitDiv, .lostUnitSprite {
+                max-width: 90%;
+            }
+
+            /* Button positioning for mobile - use class added by JS */
+            .mobile-button {
+                position: fixed !important;
+                bottom: 20px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                z-index: 1001 !important;
+                margin: 0 !important;
+                font-size: 16px !important;
+                padding: 15px 25px !important;
+                width: auto !important;
+                height: 30px !important;
+            }
+
+        }
+        
+/* ----------------------------------------------------------------------------
+    GAME - INTERMEDIATE SCREENS
+    ---------------------------------------------------------------------------- */
+
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; 
+            height: 100%;
+            background-color: rgb(0,0,0); 
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        } 
+
+        #goButton {
+            margin-left: auto;
+            margin-right: auto;
+        } 
+
+/* ----------------------------------------------------------------------------
+    GAME - POP WINDOWS
+    ---------------------------------------------------------------------------- */
+
+        .selectionWindow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 300px;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(2px);
+            border: 3px solid #B3710E;
+            border-radius: 10px;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+/*
+================================================================================
+                                   GENERAL STYLES
+================================================================================
+*/
+
+
+body {
+    background-color: #007BFF;
+    /*   Special blue from Dan's sky    */
+    /*    https://x.com/brandbydan      */
+    /*           Thanks Dan!            */
+
+    display: flex;
+    justify-content: center; 
+    height: 100vh;          
+    margin: 0;   
+}
+
+
+/* Font */
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+/*Divs I want hidden*/
+.hidden {
+    display: none !important;
+}
+
+/* ============================================================================
+   END OF STYLESHEET
+   ============================================================================ */
