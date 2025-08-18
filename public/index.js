@@ -186,9 +186,9 @@ const images = [
  * Function to preload all images allowing smooth animations in mobile environments
  */
 function preLoadImages() {
-    images.forEach(image => {
+    images.forEach(imageI => {
         const image = new Image();
-        image.src = image;
+        image.src = imageI;
     });
 }
 preLoadImages()
