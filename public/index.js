@@ -191,4 +191,4 @@ function preLoadImages() {
         image.src = image;
     });
 }
-window.onload = preLoadImages()
+preLoadImages()
