@@ -684,10 +684,9 @@ export class Game {
             positionsArray[oldR][oldC] -= unit.digit
             oldDigit -= unit.digit
             oldTile.firstChild.src = `../images/${Math.abs(oldDigit)}.png`
-            this.displayCheckedKing()
-            this.displayStats() //Updating the player's information window
+
             this.explosion(row, col) //triggering the explosion animation
-            this.attemptCloning() //If the user has a clone available, it will use it
+            
             return;
         }
 
@@ -1058,6 +1057,11 @@ export class Game {
         }
         tile.firstChild.src = '../images/0.png'
 
+        //Update the players status.
+        this.displayCheckedKing()
+        this.displayStats()
+        this.attemptCloning() //If the user has a clone available, it will use it
+
     }
 
 
@@ -1083,6 +1087,11 @@ export class Game {
             await this.delay(150);
         }
         tile.firstChild.src = '../images/0.png'
+
+        //Update the players status.
+        this.displayCheckedKing()
+        this.displayStats()
+        this.attemptCloning() //If the user has a clone available, it will use it
     }
 
 
