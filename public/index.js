@@ -130,36 +130,65 @@ window.saveBoardStates = async function(gameId, game) {
 };
 
 
+//Array of all images addresses
+const images = [
+    './images/-1-hover.png',
+    './images/-1.png',
+    './images/-2-hover.png',
+    './images/-2.png',
+    './images/-3-hover.png',
+    './images/-3.png',
+    './images/-4-hover.png',
+    './images/-4.png',
+    './images/-5-hover.png',
+    './images/-5.png',
+    './images/-6-hover.png',
+    './images/-6.png',
+    './images/0.png',
+    './images/1-hover.png',
+    './images/1.png',
+    './images/2-hover.png',
+    './images/2.png',
+    './images/3-hover.png',
+    './images/3.png',
+    './images/4-hover.png',
+    './images/4.png',
+    './images/5-hover.png',
+    './images/5.png',
+    './images/6-hover.png',
+    './images/6.png',
+    './images/10.png',
+    './images/BlackSkin.png',
+    './images/Board.png',
+    './images/ChessTfavicon.png',
+    './images/Chest-CLOSED.png',
+    './images/CloneIcon.png',
+    './images/Clouds-BACK-1.png',
+    './images/Clouds-BACK-2.png',
+    './images/Clouds-BACK-3.png',
+    './images/Clouds-FRONT-1.png',
+    './images/Clouds-FRONT-2.png',
+    './images/Explosion-1.png',
+    './images/Explosion-2.png',
+    './images/Explosion-3.png',
+    './images/Explosion-4.png',
+    './images/Explosion-5.png',
+    './images/Explosion-6.png',
+    './images/Explosion-7.png',
+    './images/Explosion-8.png',
+    './images/Mimic-Frame1.png',
+    './images/Mimic-Frame2.png',
+    './images/Mimic-Frame3.png',
+    './images/Mine-OFF.png'
+];
 
- 
-const modules = import.meta.glob('./public/images/*.png', { eager: true });
 /**
- * Caches all the required photos to enable better animations on mobile.
+ * Function to preload all images allowing smooth animations in mobile environments
  */
-async function preloadAllImages() {
-  console.log(`Preloading ${Object.keys(modules).length} images...`);
-  
-  const imagePromises = Object.entries(modules).map(([path, module]) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        console.log(`✓ Loaded: ${path}`);
-        resolve();
-      };
-      img.onerror = () => {
-        console.error(`✗ Failed to load: ${path}`);
-        reject(new Error(`Failed to load ${path}`));
-      };
-      img.src = module.default || module;
+function preLoadImages() {
+    images.forEach(image => {
+        const image = new Image();
+        image.src = image;
     });
-  });
-  
-  try {
-    await Promise.all(imagePromises);
-    console.log('All images preloaded successfully!');
-  } catch (error) {
-    console.error('Some images failed to preload:', error);
-  }
 }
-
-preloadAllImages();
+window.onload = preLoadImages()
