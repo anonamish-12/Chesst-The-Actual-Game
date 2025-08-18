@@ -67,7 +67,7 @@ function applyMobileLayout() {
         return; // Exit early if game page is hidden
     }
     
-    if (window.innerWidth <= 1090) {
+    if (window.innerWidth <= 850) {
         displaySection.classList.add('mobile-display-grid');
         
         // Move button to body for mobile
