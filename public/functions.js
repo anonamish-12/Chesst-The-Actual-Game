@@ -589,4 +589,4 @@ function checkKing(king, relativepositionsArray) {
 
 
 
-const moveFunctions = {getValidMoves, simulateMove, checkKing}
+const moveFunctions = {getValidMoves, simulateMove, checkKing};

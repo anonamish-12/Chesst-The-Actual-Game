@@ -5,7 +5,7 @@ console.log(`//    \\\\|  \\\\||█████||  \\\\||`)
 
 
 
-import { Game } from './classes/Game.js';
+import { Game } from '/classes/Game.js';
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";

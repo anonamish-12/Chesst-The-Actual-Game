@@ -1,8 +1,8 @@
-import { Player } from './Player.js';
-import { Unit } from './Unit.js';
-import { Chest } from './Chest.js';
-import { Mine } from './Mine.js';
-import { moveFunctions as moveFuncts } from '../functions.js';
+import { Player } from '/classes/Player.js';
+import { Unit } from '/classes/Unit.js';
+import { Chest } from '/classes/Chest.js';
+import { Mine } from '/classes/Mine.js';
+import { moveFunctions as moveFuncts } from 'functions.js';
 
 export class Game {
     /**
@@ -92,6 +92,8 @@ export class Game {
         
     }
 
+
+
     /**
      * 1. Takes the positionsArray and creates a DOM element that represents the board
      * 2. Loops through each number on the positions array, 
@@ -118,7 +120,7 @@ export class Game {
 
                 //Apply an empty sprite to each tile
                 const img = document.createElement('img');
-                img.src = './images/units/0.png';
+                img.src = '/images/units/0.png';
     
                 
                 const digit = positionsArray[row][col];
@@ -254,7 +256,7 @@ export class Game {
                                 turn.selectedClone.rowPos = row; turn.selectedClone.colPos = col; //Update it's position values
                                 positionsArray[row][col] += turn.selectedClone.digit //Add it's digit to the tiles position
                                 digit = positionsArray[row][col] //update the digit reading
-                                img.src = `./images/units/${turn.selectedClone.digit}.png`
+                                img.src = `/images/units/${turn.selectedClone.digit}.png`
                                 if (Math.abs(digit) > 10) {
                                     tile.style.borderColor = 'red';
                                 }
@@ -366,9 +368,9 @@ export class Game {
         let t = document.getElementById(`tile(${row}${col})`);
         let img = t.firstChild;
         if (makeHover) {
-            img.src = `./images/units/${digit}-hover.png`;
+            img.src = `/images/units/${digit}-hover.png`;
         } else {
-            img.src = `./images/units/${digit}.png`;
+            img.src = `/images/units/${digit}.png`;
         }
         
     }
@@ -625,7 +627,7 @@ export class Game {
 
                 let digit = positionsArray[unit.rowPos][unit.colPos];
                 let tile = document.getElementById(`tile(${unit.rowPos}${unit.colPos})`)
-                tile.firstChild.src = `./images/units/${digit}.png`
+                tile.firstChild.src = `/images/units/${digit}.png`
                 
                 break;
         }
@@ -682,7 +684,7 @@ export class Game {
             positionsArray[row][col] = 0
             positionsArray[oldR][oldC] -= unit.digit
             oldDigit -= unit.digit
-            oldTile.firstChild.src = `./images/units/${Math.abs(oldDigit)}.png`
+            oldTile.firstChild.src = `/images/units/${Math.abs(oldDigit)}.png`
             this.displayStats() //Updating the player's information window
             this.explosion(row, col) //triggering the explosion animation
             this.attemptCloning() //If the user has a clone available, it will use it
@@ -712,7 +714,7 @@ export class Game {
 
             positionsArray[oldR][oldC] -= unit.digit; // Subtract from the king’s original position
             oldDigit -= unit.digit;
-            oldTile.firstChild.src = `./images/units/${Math.abs(oldDigit)}.png`
+            oldTile.firstChild.src = `/images/units/${Math.abs(oldDigit)}.png`
 
             
 
@@ -726,7 +728,7 @@ export class Game {
             positionsArray[row][rookC] -= rook.digit; // Subtract from the rook’s original position
             oldDigit = positionsArray[row][rookC]
             oldTile = document.getElementById(`tile-(${row}${rookC})`)
-            oldTile.firstChild.src = `./images/units/${Math.abs(oldDigit)}.png`
+            oldTile.firstChild.src = `/images/units/${Math.abs(oldDigit)}.png`
        
 
             return;
@@ -762,7 +764,7 @@ export class Game {
 
         positionsArray[oldR][oldC] -= unit.digit;
         oldDigit -= unit.digit;
-        oldTile.firstChild.src = `./images/units/${Math.abs(oldDigit)}.png`;
+        oldTile.firstChild.src = `/images/units/${Math.abs(oldDigit)}.png`;
         if (oldTile.style.borderColor === 'red') { //If there was a mine underneath the unit
             oldTile.style.borderColor = '#B3710E';
         }
@@ -857,7 +859,7 @@ export class Game {
         
             //If no unit was found in this.lost that had the digit 'i', make an empty display
             if (isEmpty) {
-                sprite.src = './images/units/0.png' 
+                sprite.src = '/images/units/0.png' 
                 lostUnitDiv.appendChild(sprite);
             }
             //And you know what this does
@@ -940,6 +942,7 @@ export class Game {
     }
 
 
+
     /**
      * Searches the active player's units seeing if they have a pawn that meets promotable criterea.
      * */
@@ -981,7 +984,7 @@ export class Game {
 
 
 
-     /**
+    /**
     * Appropriatly applies or removes a background to the board tiles that are valid positions to set a mine.
     */
     settingMineDisplay() {  
@@ -1047,13 +1050,13 @@ export class Game {
     async explosion(row, col) {
 
         let tile = document.getElementById(`tile(${row}${col})`)
-        tile.firstChild.src = './images/units/10.png'
+        tile.firstChild.src = '/images/units/10.png'
         await this.delay(175)
         for (let i = 1; i < 9; i++) {
-            tile.firstChild.src = `./images/explosion/Explosion-${i}.png`
+            tile.firstChild.src = `/images/explosion/Explosion-${i}.png`
             await this.delay(150)
         }
-        tile.firstChild.src = './images/units/0.png'
+        tile.firstChild.src = '/images/units/0.png'
 
     }
 
@@ -1073,13 +1076,13 @@ export class Game {
         while (sets >= 0) {
             --sets;
             for (let i = 1; i <= 3; ++i) {
-                tile.firstChild.src = `./images/mimic/Mimic-Frame${i}.png`;
+                tile.firstChild.src = `/images/mimic/Mimic-Frame${i}.png`;
                 await this.delay(150);
             }
-            tile.firstChild.src = `./images/mimic/Mimic-Frame2.png`;
+            tile.firstChild.src = `/images/mimic/Mimic-Frame2.png`;
             await this.delay(150);
         }
-        tile.firstChild.src = './images/units/0.png'
+        tile.firstChild.src = '/images/units/0.png'
     }
 
 
@@ -1239,7 +1242,7 @@ export class Game {
             sprite.className = 'lostUnitSprite';
 
             if (k > 0) {
-                sprite.src = "./images/CloneIcon.png";
+                sprite.src = "/images/CloneIcon.png";
             } else {
                 return
             }
@@ -1402,7 +1405,7 @@ export class Game {
                 let tile = document.getElementById(`tile(${row}${col})`)
                 tile.style.borderColor = '#B3710E'
                 let digit = this.positionsArray[row][col]
-                tile.firstChild.src = `./images/units/${digit}.png`
+                tile.firstChild.src = `/images/units/${digit}.png`
                 tile.style.borderColor = ''
             })
 
@@ -1441,7 +1444,7 @@ export class Game {
                 if (Math.abs(this.positionsArray[row][col]) > 10) {
                     tile.style.borderColor = 'red'
                 } else {
-                    tile.firstChild.src = `./images/units/10.png`
+                    tile.firstChild.src = `/images/units/10.png`
                 }
             })
 
@@ -1476,11 +1479,12 @@ export class Game {
     }
 
 
+
     /**
      * Hides the game display and sends the player back to homepage.
      */
     backToHomePage() {
-
+        window.location.reload();
     }
 
 }

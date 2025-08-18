@@ -1,4 +1,4 @@
-import { Unit } from "./Unit.js";
+import { Unit } from "/classes/Unit.js";
 
 export class Player {
 
