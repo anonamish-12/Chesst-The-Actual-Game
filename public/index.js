@@ -128,3 +128,38 @@ window.saveBoardStates = async function(gameId, game) {
         console.error("Error saving board states: ", error);
     }
 };
+
+
+
+ 
+const modules = import.meta.glob('./public/images/*.png', { eager: true });
+/**
+ * Caches all the required photos to enable better animations on mobile.
+ */
+async function preloadAllImages() {
+  console.log(`Preloading ${Object.keys(modules).length} images...`);
+  
+  const imagePromises = Object.entries(modules).map(([path, module]) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        console.log(`✓ Loaded: ${path}`);
+        resolve();
+      };
+      img.onerror = () => {
+        console.error(`✗ Failed to load: ${path}`);
+        reject(new Error(`Failed to load ${path}`));
+      };
+      img.src = module.default || module;
+    });
+  });
+  
+  try {
+    await Promise.all(imagePromises);
+    console.log('All images preloaded successfully!');
+  } catch (error) {
+    console.error('Some images failed to preload:', error);
+  }
+}
+
+preloadAllImages();
