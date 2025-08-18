@@ -12,8 +12,8 @@ export class Mine {
         this.rowPos = -1;
         this.colPos = -1;
 
-        this.inactiveSprite = './images/units/Mine-OFF.png';
-        this.activeSprite = './images/units/10.png';
+        this.inactiveSprite = './images/Mine-OFF.png';
+        this.activeSprite = './images/10.png';
 
     }
 

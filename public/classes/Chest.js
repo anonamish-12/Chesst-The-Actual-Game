@@ -161,7 +161,7 @@ export class Chest {
 
         let tile = document.getElementById(`tile(${this.rowPos}${this.colPos})`)
         let image = tile.firstChild;
-        image.src = `/images/units/${digit}.png`
+        image.src = `/images/${digit}.png`
 
         this.rowPos = -1;
         this.colPos = -1;
