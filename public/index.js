@@ -1,16 +1,13 @@
-console.log(`Made By:`)
-console.log(`  //\\\\ ||\\\\  ||█████||\\\\  ||`)
-console.log(` //--\\\\|| \\\\ ||     █| \\\\ ||`)
-console.log(`//    \\\\|  \\\\||█████||  \\\\||`)
+console.log(`Built By:`)
+console.log(`  //\\ ||\\  ||█████||\\  ||`)
+console.log(` //--\\|| \\ ||     █| \\ ||`)
+console.log(`//    \\|  \\||█████||  \\||`)
 
-
-
-import { Game } from '/classes/Game.js';
+import { Game } from './classes/Game.js';
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-
 
 /**
  * Applies a red color to the infoText.
@@ -19,15 +16,12 @@ let makeRed = () => {
     infoText.style.color = '#a70000';
 }
 
-
 /**
 * Removes the red color applied to the infoText.
 */
 let stopRed = () => {
     infoText.style.color = '';
 }
-
-
 
 /**
  * Hides the homepage and presents the set chess board.
@@ -48,7 +42,6 @@ let vAIBttn = document.getElementById('closedBttn');
 
 let infoText = document.getElementById('inDev');
 
-
 //Event Listners
 vAIBttn.addEventListener('mouseenter', makeRed)
 vAIBttn.addEventListener('mouseleave', stopRed)
@@ -59,7 +52,6 @@ PnPBttn.addEventListener('click', () => {
     const game = new Game(true);
     HideHomePage()
 })
-
 
 /* Style formatting for Mobile devices */
 let buttonOriginalParent = null;
@@ -107,8 +99,6 @@ document.addEventListener('DOMContentLoaded', applyMobileLayout);
 // Apply on window resize
 window.addEventListener('resize', applyMobileLayout);
 
-
-
 //Configuring the firestore data base to store completed game board states.
 const firebaseConfig = {
   apiKey: "AIzaSyD5T3x1PFMTVmqES7KJsWwghQFRGZWNHPI",
@@ -124,7 +114,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app); 
 
-
 /**
  * Collects and stores each board position from completed games in a firestore database.
  * @param {String} gameId The identifying string generated to represent this specific game.
@@ -139,29 +128,3 @@ window.saveBoardStates = async function(gameId, game) {
         console.error("Error saving board states: ", error);
     }
 };
-
-
-
-//Caching all images upon loading
-const fs = require('fs');
-const path = require('path');
-
-const imageCache = {};
-const imagesDir = path.join(__dirname, 'public', 'images');
-
-function preloadImages() {
-  fs.readdir(imagesDir, (err, files) => {
-    if (err) throw err;
-    const imagePaths = files
-      .filter(file => /\.(png|jpg|jpeg|gif)$/i.test(file))
-      .map(file => `/images/${file}`);
-    imagePaths.forEach(path => {
-      const img = new Image();
-      img.src = path;
-      imageCache[path] = img;
-    });
-  });
-}
-
-preloadImages();
-

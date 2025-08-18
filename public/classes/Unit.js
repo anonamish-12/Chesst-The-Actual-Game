@@ -27,8 +27,8 @@ export class Unit {
         // 6 => King
 
         // This is the address to the unit's sprite
-        this.sprite = `/images/${digit}.png`;
-        this.hoveredSprite = `/images/${digit}-hover.png`;
+        this.sprite = `../images/${digit}.png`;
+        this.hoveredSprite = `../images/${digit}-hover.png`;
 
 
         //These are the initial row and coloumn positions of the unit.
