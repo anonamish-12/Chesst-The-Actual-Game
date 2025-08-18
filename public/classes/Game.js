@@ -2,7 +2,7 @@ import { Player } from '/classes/Player.js';
 import { Unit } from '/classes/Unit.js';
 import { Chest } from '/classes/Chest.js';
 import { Mine } from '/classes/Mine.js';
-import { moveFunctions as moveFuncts } from 'functions.js';
+import { moveFunctions as moveFuncts } from 'public/functions.js';
 
 export class Game {
     /**
