@@ -39,13 +39,14 @@ export class Chest {
      */
     setCount(first) {
         let randNum;
-        randNum = Math.random() * (10 - 7) + 7; //Random number between 7-(inclusive) and 10-(exclusive) 
+        randNum = Math.random() * (9 - 4) + 4; //Random number between 4-(inclusive) and 9-(exclusive) 
 
         //Enabling a shorter countdown on the first setting. (1-3 Rounds)
-        if (first) randNum = Math.random() * (8 - 3) + 3; //Random number between 3-(inclusive) and 8-(exclusive) 
+        if (first) randNum = Math.random() * (7 - 1) + 1; //Random number between 1-(inclusive) and 7-(exclusive) 
 
-        let randInt = Math.floor(randNum); //Converts to integer between 6-(inclusive) and 8-(inclusive) -- This represents 3-4 full rounds
-        this.count = randInt * this.countFactor;
+        randNum *= this.countFactor;
+        let randInt = Math.ceil(randNum); //Converts to integer
+        this.count = randInt
         this.countFactor *= 0.9;
     }
 
