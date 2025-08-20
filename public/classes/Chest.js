@@ -19,6 +19,7 @@ export class Chest {
         //Round delay till next spawned
         this.count;
         this.setCount(true);
+        this.countFactor = 1;
 
         //Contents
         // 2% 'Mimic'
@@ -38,13 +39,14 @@ export class Chest {
      */
     setCount(first) {
         let randNum;
-        randNum = Math.random() * (9 - 6) + 6; //Random number between 6-(inclusive) and 9-(exclusive) 
+        randNum = Math.random() * (8 - 5) + 5; //Random number between 5-(inclusive) and 8-(exclusive) 
 
         //Enabling a shorter countdown on the first setting. (1-3 Rounds)
-        if (first) randNum = Math.random() * (7 - 2) + 2; //Random number between 2-(inclusive) and 7-(exclusive) 
+        if (first) randNum = Math.random() * (6 - 1) + 1; //Random number between 1-(inclusive) and 6-(exclusive) 
 
-        let randInt = Math.floor(randNum); //Converts to integer between 6-(inclusive) and 8-(inclusive) -- This represents 3-4 full rounds
-        this.count = randInt;
+        let randInt = Math.ceil(randNum); //Converts to integer between 6-(inclusive) and 8-(inclusive) -- This represents 3-4 full rounds
+        this.count = randInt * this.countFactor;
+        this.countFactor *= 0.9;
     }
 
     /**
@@ -155,7 +157,7 @@ export class Chest {
             posArray[this.rowPos][this.colPos] -= this.digit * Math.sign(digit)
             digit -= this.digit * Math.sign(digit)
         } else { 
-            //It is being collected and the deciscion making is being made in makeMove()
+            //It is being collected and further deciscion making is being made in makeMove()
             return
         }
 
