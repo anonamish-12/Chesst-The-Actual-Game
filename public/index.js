@@ -1,7 +1,7 @@
 console.log(`Built By:`)
-console.log(`  //\\ ||\\  ||█████||\\  ||`)
-console.log(` //--\\|| \\ ||     █| \\ ||`)
-console.log(`//    \\|  \\||█████||  \\||`)
+console.log(`  //\\\\ ||\\\\  ||█████||\\\\  ||`)
+console.log(` //--\\\\|| \\\\ ||     █| \\\\ ||`)
+console.log(`//    \\\\|  \\\\||█████||  \\\\||`)
 
 import { Game } from './classes/Game.js';
 
