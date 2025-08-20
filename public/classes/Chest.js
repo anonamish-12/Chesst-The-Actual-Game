@@ -18,8 +18,9 @@ export class Chest {
 
         //Round delay till next spawned
         this.count;
-        this.setCount(true);
         this.countFactor = 1;
+        this.setCount(true);
+        
 
         //Contents
         // 2% 'Mimic'
@@ -39,15 +40,17 @@ export class Chest {
      */
     setCount(first) {
         let randNum;
-        randNum = Math.random() * (9 - 4) + 4; //Random number between 4-(inclusive) and 9-(exclusive) 
+        randNum = Math.random() * (7 - 3) + 3; //Random number between 3-(inclusive) and 9-(exclusive) 
 
         //Enabling a shorter countdown on the first setting. (1-3 Rounds)
-        if (first) randNum = Math.random() * (7 - 1) + 1; //Random number between 1-(inclusive) and 7-(exclusive) 
+        if (first) randNum = Math.random() * (5 - 1) + 1; //Random number between 1-(inclusive) and 5-(exclusive) 
 
         randNum *= this.countFactor;
         let randInt = Math.ceil(randNum); //Converts to integer
         this.count = randInt
         this.countFactor *= 0.9;
+        console.log(this.count)
+        
     }
 
     /**
@@ -59,6 +62,7 @@ export class Chest {
      * - 2% Mimics
      */
     setContents() {
+
         let randNum = Math.random()
         if (randNum > 0.34) {
             this.contains = 'Mine';
@@ -102,6 +106,8 @@ export class Chest {
                 this.spawnChest(posArray);
             } else {
                 this.count--;
+                console.log("tick")
+                console.log(this.count)
             }
 
         } else if (this.longevity > 0 ) {
