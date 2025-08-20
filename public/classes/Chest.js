@@ -47,6 +47,7 @@ export class Chest {
         let randInt = Math.ceil(randNum); //Converts to integer between 6-(inclusive) and 8-(inclusive) -- This represents 3-4 full rounds
         this.count = randInt * this.countFactor;
         this.countFactor *= 0.9;
+        console.log("Count Set")
     }
 
     /**
