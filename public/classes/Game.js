@@ -718,15 +718,16 @@ export class Game {
             
 
             positionsArray[row][rookNewC] += rook.digit; // We then move the Rook to the new tile
-            newTile = document.getElementById(`tile-(${row}${rookNewC})`) 
-            newTile.firstChild.src = rook.sprite
-            rook.rowPos = row; rook.colPos = rookNewC;
+            newTile = document.getElementById(`tile(${row}${rookNewC})`);
+            newTile.firstChild.src = rook.sprite;
+            rook.setPos([row, rookNewC]);
 
 
 
             positionsArray[row][rookC] -= rook.digit; // Subtract from the rook’s original position
+            //Need to reset the oldRook 
             oldDigit = positionsArray[row][rookC]
-            oldTile = document.getElementById(`tile-(${row}${rookC})`)
+            oldTile = document.getElementById(`tile(${row}${rookC})`)
             oldTile.firstChild.src = `../images/${Math.abs(oldDigit)}.png`
        
 
